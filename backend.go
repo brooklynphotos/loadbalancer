@@ -71,9 +71,10 @@ func main() {
 			lb(writer, request.WithContext(ctx))
 		}
 
-		var m sync.RWMutex
 		serverPool.AddBackend(&Backend{
-			serverURL, true, m, proxy,
+			URL:          serverURL,
+			Alive:        true,
+			ReverseProxy: proxy,
 		})
 		log.Printf("Configured server: %s\n", serverURL)
 	}
